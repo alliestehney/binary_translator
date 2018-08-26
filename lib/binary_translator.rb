@@ -26,7 +26,65 @@ class BinaryTranslator
       "w" => "010111",
       "x" => "011000",
       "y" => "011001",
-      "z" => "011010"
+      "z" => "011010",
+      " " => "000000",
     }
+
+    @binary_to_alpha = {
+      "000001" => "a",
+      "000010" => "b",
+      "000011" => "c",
+      "000100" => "d",
+      "000101" => "e",
+      "000110" => "f",
+      "000111" => "g",
+      "001000" => "h",
+      "001001" => "i",
+      "001010" => "j",
+      "001011" => "k",
+      "001100" => "l",
+      "001101" => "m",
+      "001110" => "n",
+      "001111" => "o",
+      "010000" => "p",
+      "010001" => "q",
+      "010010" => "r",
+      "010011" => "s",
+      "010100" => "t",
+      "010101" => "u",
+      "010110" => "v",
+      "010111" => "w",
+      "011000" => "x",
+      "011001" => "y",
+      "011010" => "z",
+      "000000" => " ",
+    }
+  end
+
+  def translate_to_binary(letter)
+    lowercase = letter.downcase
+    return @alpha_to_binary[lowercase]
+  end
+
+  def translate_to_alpha(binary)
+    return @binary_to_alpha[binary]
+  end
+
+  def translate_to_binary_word(word)
+    binary_word = []
+    letters = word.split('')
+    letters.each do |letter|
+      binary_word << @alpha_to_binary[letter]
+    end
+    return binary_word.join('')
+  end
+
+  def translate_to_alpha_word(bword)
+    alpha_word = []
+    letters = bword.scan(/.{6}/)
+    letters.each do |letter|
+      alpha_word << @binary_to_alpha[letter]
+    end
+    return alpha_word.join('')
   end
 end
